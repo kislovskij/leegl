@@ -29,6 +29,9 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
+var termsController = require('./controllers/terms');
+var aspectController = require('./controllers/aspect');
+var aspectCategoryController = require('./controllers/aspect-category');
 
 /**
  * API keys and Passport configuration.
@@ -126,6 +129,15 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
+
+app.get('/terms/create', termsController.getAddTerms);
+app.post('/terms/create', termsController.postAddTerms);
+app.get('/aspect/create', aspectController.getAddAspect);
+app.post('/aspect/create', aspectController.postAddAspect);
+app.get('/category/create', aspectCategoryController.getAddAspectCategory);
+app.post('/category/create', aspectCategoryController.postAddAspectCategory);
+
+app.get('/terms/domain/:domain', termsController.getTermsByDomain);
 
 /**
  * API examples routes.
