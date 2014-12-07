@@ -130,12 +130,12 @@ app.post('/account/password', passportConf.isAuthenticated, userController.postU
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 
-app.get('/terms/create', termsController.getAddTerms);
-app.post('/terms/create', termsController.postAddTerms);
-app.get('/aspect/create', aspectController.getAddAspect);
-app.post('/aspect/create', aspectController.postAddAspect);
-app.get('/category/create', aspectCategoryController.getAddAspectCategory);
-app.post('/category/create', aspectCategoryController.postAddAspectCategory);
+app.get('/terms/create', passportConf.isAuthenticated, passportConf.isAdministrator, termsController.getAddTerms);
+app.post('/terms/create', passportConf.isAuthenticated, passportConf.isAdministrator, termsController.postAddTerms);
+app.get('/aspect/create', passportConf.isAuthenticated, passportConf.isAdministrator, aspectController.getAddAspect);
+app.post('/aspect/create', passportConf.isAuthenticated, passportConf.isAdministrator, aspectController.postAddAspect);
+app.get('/category/create', passportConf.isAuthenticated, passportConf.isAdministrator, aspectCategoryController.getAddAspectCategory);
+app.post('/category/create', passportConf.isAuthenticated, passportConf.isAdministrator, aspectCategoryController.postAddAspectCategory);
 
 app.get('/terms/domain/:domain', termsController.getTermsByDomain);
 
