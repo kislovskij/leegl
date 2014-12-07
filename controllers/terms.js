@@ -28,7 +28,7 @@ exports.getAddTerms = function(req, res) {
 };
 
 exports.getTermsByDomain = function(req, res) {
-  Terms.find({ serviceDomain: req.params.domain }, function(err, terms) {
+  Terms.find({ serviceDomains: req.params.domain }, function(err, terms) {
   	return res.send(terms);
   }).populate('aspects.aspect');
 };
