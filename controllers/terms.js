@@ -46,6 +46,10 @@ exports.postAddTerms = function(req, res) {
 
     var aspects = [];
 
+    if (req.body.aspects === undefined) {
+      return res.send(500);
+    }
+
     req.body.aspects.map(function(k, v) {
     	aspects.push({
     		aspect: k,
@@ -56,11 +60,12 @@ exports.postAddTerms = function(req, res) {
 
 	var terms = new Terms({
 	  name: req.body.name,
-	  serviceDomain: req.body.domain,
+	  serviceDomains: req.body.domain.split(','),
 	  terms: req.body.terms,
-	  termsUrl: req.body.termsUrl,
+	  termsUrls: req.body.termsUrl.split(','),
 	  aspects: aspects,
 	  registrationUrl: req.body.registrationUrl,
+    interception: req.body.interception,
 	  selector: req.body.selector
 	});
 

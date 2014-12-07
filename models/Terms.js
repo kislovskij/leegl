@@ -4,9 +4,17 @@ var mongoose = require('mongoose'),
 
 var termsSchema = new mongoose.Schema({
   name: String,
-  serviceDomain: { type: String, unique: true, lowercase: true },
+  serviceDomains: [
+    {
+      type: String, unique: true, lowercase: true
+    }
+  ],
   terms: String,
-  termsUrl: String,
+  termsUrls: [
+    {
+      type: String
+    }
+  ],
   aspects: [
     {
       aspect: {

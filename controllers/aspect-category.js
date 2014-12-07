@@ -27,7 +27,7 @@ exports.postAddAspectCategory = function(req, res) {
     aspectCategory.save(function(err, aspectCategory) {
       if (err) return next(err);
 
-      res.redirect('/category/create');
+      return res.redirect('/category/create');
     });
   });
 
