@@ -173,3 +173,13 @@ exports.isAuthorized = function(req, res, next) {
     res.redirect('/auth/' + provider);
   }
 };
+
+exports.isAdministrator = function(req, res, next) {
+  if (!req.user) return res.send(401);
+
+  if (req.user.administrator) {
+    next();
+  } else {
+    res.send(401);
+  }
+};

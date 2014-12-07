@@ -58,16 +58,16 @@ exports.postAddTerms = function(req, res) {
     	});
     });
 
-	var terms = new Terms({
-	  name: req.body.name,
-	  serviceDomains: req.body.domain.split(','),
-	  terms: req.body.terms,
-	  termsUrls: req.body.termsUrl.split(','),
-	  aspects: aspects,
-	  registrationUrl: req.body.registrationUrl,
-    interception: req.body.interception,
-	  selector: req.body.selector
-	});
+  	var terms = new Terms({
+  	  name: req.body.name,
+  	  serviceDomains: req.body.domain.split(','),
+  	  terms: req.body.terms,
+  	  termsUrls: req.body.termsUrl.split(','),
+  	  aspects: aspects,
+  	  registrationUrl: req.body.registrationUrl,
+      interception: req.body.interception,
+  	  selector: req.body.selector
+  	});
 
     terms.save(function(err, terms) {
       if (err) return next(err);
