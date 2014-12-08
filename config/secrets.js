@@ -20,7 +20,7 @@ module.exports = {
 
   db: process.env.MONGOLAB_URI || process.env.MONGODB || 'mongodb://localhost:27017/test',
 
-  sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here',
+  sessionSecret: process.env.SESSION_SECRET || '$XK(:-?<[};d}yANeMgkBPVVx{N7#QXshd',
 
   mailgun: {
     user: process.env.MAILGUN_USER || 'postmaster@united-creative.com',
