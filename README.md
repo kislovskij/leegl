@@ -7,3 +7,19 @@ No one reads the fine print - because major online services don't want you to re
 ## View it in Action
 
 ![Demo](/public/img/demo.gif "Demo")
+
+## Supported Websites
+
+- GitHub	(github.com)
+- Twitter	(twitter.com)
+- SoundCloud	(soundcloud.com)
+- WordPress	(signup.wordpress.com)
+- Tumblr	(www.tumblr.com)
+- Spotify	(spotify.com)
+- Zalando	(www.zalando.de)
+- Zalando Lounge	(www.zalando-lounge.de)
+- Netflix	(www.netflix.com)
+- Google Play Music	(play.google.com)
+- Dropbox	(www.dropbox.com)
+- XING	(www.xing.com)
+- Delicious	(delicious.com)
