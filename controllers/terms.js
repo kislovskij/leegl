@@ -8,7 +8,7 @@ var Terms = require('../models/Terms'),
  * Contact form page.
  */
 
-exports.getAddTerms = function(req, res) {
+exports.getCreateTerms = function(req, res) {
   Aspect.find({}, function(err, aspects) {
   	var result = aspects.reduce(function(prev, curr, index, arr) {
   	  var cat = curr["category"].name;
@@ -42,7 +42,7 @@ exports.listTerms = function(req, res) {
   });
 };
 
-exports.postAddTerms = function(req, res) {
+exports.postCreateTerms = function(req, res) {
   if(typeof req.body.aspects == 'string') {
   	req.body.aspects = [req.body.aspects];
   }
@@ -83,5 +83,22 @@ exports.postAddTerms = function(req, res) {
       res.redirect('/terms/create');
     });
   });
+
+};
+
+exports.getTerms = function(req, res) {
+  if (!req.params.id) return res.send(401);
+
+  Terms.findOne({'_id': req.params.id}, function(err, terms) {
+    
+    res.render('edit-terms', {
+      title: 'Terms of ' + terms.name,
+      terms: terms
+    });
+
+  });
+};
+
+exports.postTerms = function(req, res) {
 
 };

@@ -1,0 +1,65 @@
+extends layout
+
+block content
+  .page-header
+    h3 Add Terms
+
+  form.form-horizontal(role='form', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group
+      label(class='col-sm-2 control-label', for='name') Service Name
+      .col-sm-8
+        input.form-control(type='text', name='name', id='name', autofocus=true, value=terms.name)
+    .form-group
+      label(class='col-sm-2 control-label', for='domain') Domain Name
+      .col-sm-8
+        input.form-control(type='text', name='domain', id='domain', autofocus=true, value=terms.domain)
+    .form-group
+      label(class='col-sm-2 control-label', for='termsUrl') Terms URL
+      .col-sm-8
+        input.form-control(type='text', name='termsUrl', id='termsUrl', autofocus=true, value=terms.termsUrl)
+    .form-group
+      label(class='col-sm-2 control-label', for='registrationUrl') Registration URL
+      .col-sm-8
+        input.form-control(type='text', name='registrationUrl', id='registrationUrl', autofocus=true, value=terms.registrationUrl)
+    .form-group
+      label(class='col-sm-2 control-label', for='interception') Interception
+      .col-sm-8
+        div
+          input(type='radio', name='interception', id='interception', value='checkbox', checked=terms.interception=='checkbox')
+          span &nbsp;Checkbox
+        div
+          input(type='radio', name='interception', id='interception', value='button', checked=terms.interception=='button')
+          span &nbsp;Button
+    .form-group
+      label(class='col-sm-2 control-label', for='selector') Selector
+      .col-sm-8
+        input.form-control(type='text', name='selector', id='selector', autofocus=true, value=terms.selector)
+    .form-group
+      label(class='col-sm-2 control-label', for='aspects') Aspects
+      .col-sm-8
+        each category, key in categories
+          h4
+            = key
+          br
+          each aspect in category
+            div.toggle
+              input(type='checkbox', name='aspects', value=aspect._id, checked=terms.aspects[aspect._id])
+              &nbsp;
+              label
+                = aspect.text
+
+              br
+
+              div
+                label(class='control-label', for='weight') Weight – from 1 (best) to 10 (worst)
+                input.form-control(type='text', name=aspect._id + '_weight', id='weight', value=terms[aspect._id + '_weight'])
+
+                label(class='control-label', for='citation') Citation
+                textarea.form-control(type='text', name=aspect._id + '_citation', id='citation', value=terms[aspect._id + '_citation'])
+                br
+    .form-group
+      .col-sm-offset-2.col-sm-8
+        button.btn.btn-primary(type='submit')
+          span.ion-paper-airplane
+          | Send for Review
