@@ -12,10 +12,11 @@ block content
     tbody
       each service in terms
         tr
-          td service.name
-          td service.serviceDomains
           td
-            a(href='/terms/' + service._id)
-              Edit
+            = service.name
+          td
+            = service.serviceDomains
+          td
+            a(href='/terms/' + service._id) Edit
 
   
