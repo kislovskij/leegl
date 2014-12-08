@@ -42,7 +42,6 @@ block content
           each category, key in categories
             h4
               = key
-            br
             each aspect in category
               div.toggle
                 input(type='checkbox', name='aspects', value=aspect._id)
@@ -59,6 +58,7 @@ block content
                   label(class='control-label', for='citation') Citation
                   textarea.form-control(type='text', name=aspect._id + '_citation', id='citation')
                   br
+          hr
       .form-group
         .col-sm-offset-2.col-sm-8
           button.btn.btn-primary(type='submit')
