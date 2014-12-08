@@ -89,14 +89,27 @@ exports.postCreateTerms = function(req, res) {
 exports.getTerms = function(req, res) {
   if (!req.params.id) return res.send(401);
 
-  Terms.findOne({'_id': req.params.id}, function(err, terms) {
-    
-    res.render('edit-terms', {
-      title: 'Terms of ' + terms.name,
-      terms: terms
-    });
 
-  });
+  Aspect.find({}, function(err, aspects) {
+    var result = aspects.reduce(function(prev, curr, index, arr) {
+      var cat = curr["category"].name;
+      if (!prev[cat]) {
+        prev[cat] = [];
+      }
+      prev[cat].push(curr);
+      return prev;
+    }, {});
+
+    Terms.findOne({'_id': req.params.id}, function(err, terms) {
+      
+      res.render('edit-terms', {
+        title: 'Terms of ' + terms.name,
+        terms: terms,
+        categories: result
+      });
+
+    });
+  }).populate('category');
 };
 
 exports.postTerms = function(req, res) {
