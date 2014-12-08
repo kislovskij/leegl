@@ -19,7 +19,7 @@ exports.getAddTerms = function(req, res) {
   	  return prev;
   	}, {});
 
-	res.render('add-terms', {
+	  res.render('add-terms', {
 	    title: 'Add Terms',
 	    categories: result
   	});
@@ -31,6 +31,15 @@ exports.getTermsByDomain = function(req, res) {
   Terms.find({ serviceDomains: req.params.domain }, function(err, terms) {
   	return res.send(terms);
   }).populate('aspects.aspect');
+};
+
+exports.listTerms = function(req, res) {
+  Terms.find({}, function(err, terms) {
+    res.render('list-terms', {
+      title: 'List Terms',
+      terms: terms
+    });
+  });
 };
 
 exports.postAddTerms = function(req, res) {

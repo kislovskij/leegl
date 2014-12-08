@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .page-header
+    h3 List of Terms
+
+  table
+    thead
+      tr
+        td Name
+        td Domain Name
+    tbody
+      each service in terms
+        tr
+          td service.name
+          td service.serviceDomains
+          td
+            a(href='/terms/' + service._id)
+              Edit
+
+  
