@@ -4,14 +4,20 @@ block content
   .jumbotron
     .container
       div.text-center
-        img(src='/img/leegl.svg', height='80px')
+        img(class='logo', src='/img/leegl.svg', height='80px')
         p.lead Long Terms. Short Version.
       hr
       .row
-        .col-sm-6
-          img(src='http://placehold.it/1200x620', width='100%')
-        .col-sm-6
-          h2 Heading
-          p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-          p
-            a.btn.btn-primary.btn-lg(href='#', role='button') Install for Google Chrome »
+        .col-md-6
+          img(src='http://placehold.it/1920x1080', width='100%')
+
+        .col-md-6
+          h2 Install the Google Chrome Extension
+          p <kbd>Right-click</kbd> on the button below and save the extension to your computer.
+          p Open the URL <kbd>chrome://extensions</kbd> and drag the extension file to the page.
+          br
+          a.btn.btn-primary.btn-lg(href='/leegl.crx', role='button') Right-click to download »
+      div.text-center
+        br
+        br
+        a(href='/terms/create') Contribute by submitting services

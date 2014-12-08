@@ -9,8 +9,12 @@
 
 	var showDialog = function() {
 
+		var backdrop = document.createElement('div');
+		backdrop.style.cssText = 'z-index: 1000000 !important; opacity: 0.6 !important; position: fixed !important; top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background-color: black !important; display: block !important;';
+		document.body.appendChild(backdrop);
+
 		var dialog = document.createElement('div');
-		dialog.style.cssText = 'position: fixed !important; outline: none !important; z-index: 10000 !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; -webkit-transform: translate(-50%, -50%) !important; background: white !important; color: rgba(0, 0, 0, 0.87) !important; overflow: visible !important;';
+		dialog.style.cssText = 'position: fixed !important; outline: none !important; z-index: 10000000 !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; -webkit-transform: translate(-50%, -50%) !important; background: white !important; color: rgba(0, 0, 0, 0.87) !important; overflow: visible !important;';
 
 		var shadow = document.createElement('div');
 		shadow.style.cssText = 'position: absolute !important; top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important;';
@@ -28,30 +32,39 @@
 		scroller.style.cssText = 'overflow: auto !important; box-sizing: border-box !important; padding: 24px 24px 0 24px !important; position: relative !important;';
 
 		var title = document.createElement('h1');
-		title.style.cssText = 'font-family: Roboto, Arial !important; font-size: 24px !important; line-height: 32px !important; border: none !important; margin: 0 !important; padding: 0 !important; text-align: left !important;';
+		title.style.cssText = 'font-family: Roboto, Arial !important; font-size: 24px !important; line-height: 32px !important; border: none !important; margin: 0 0 10px 0 !important; padding: 0 !important; text-align: left !important; -webkit-font-smoothing: antialiased;';
 		title.innerHTML = 'Long Terms. Short Version.';
 		scroller.appendChild(title);
 
 		var length = 2;
 
-		console.log(data);
+		data.aspects.sort(function(a, b) {
+			return b.weight - a.weight;
+		});
 
 		data.aspects.forEach(function(value, index) {
 			var item = document.createElement('div');
-			item.style.cssText = 'font-family: Roboto, Arial !important; font-size: 16px !important; line-height: 28px !important; padding: 28px !important; text-align: left !important;';
+			item.style.cssText = 'font-family: Roboto, Arial !important; font-size: 16px !important; line-height: 28px !important; text-align: left !important; display: flex !important; flex-direction: row !important; align-items: baseline !important;';
 
 			var badge = document.createElement('div');
-			badge.innerHTML = value.aspect;
+			badge.style.cssText = 'font-family: Roboto, Arial !important; font-size: 16px !important; width: 28px !important; height: 28px !important; background-color: #cb0000 !important; font-weight: bold !important; color: #fff !important; text-align: center; margin-right: 16px !important; -webkit-font-smoothing: antialiased;';
+			badge.innerHTML = value.weight;
 
+			var aspect = document.createElement('div');
+			aspect.style.cssText = 'padding-top: 20px !important; padding-bottom: 20px !important; flex: 1 !important; -webkit-font-smoothing: antialiased;';
 			if (index < data.aspects.length - 1) {
-				item.style.cssText += ' border-bottom: 1px solid #ccc !important;';
+				aspect.style.cssText += ' border-bottom: 1px solid #ccc !important;';
 			}
 
 			var text = value.aspect.text;
 
 			text = text.replace(new RegExp('(the )?service', 'gi'), data.name);
 
-			item.innerHTML = text;
+			aspect.innerHTML = text;
+
+			item.appendChild(badge);
+			item.appendChild(aspect);
+
 			scroller.appendChild(item);
 		});
 
@@ -75,12 +88,13 @@
 		var declineButton = document.createElement('div');
 		declineButton.style.cssText = 'display: inline-block !important; position: relative !important; box-sizing: border-box !important; min-width: 5.14em !important; margin: 0 0.29em !important; background: transparent !important; text-align: center !important; font: inherit !important; text-transform: uppercase !important; outline: none !important; cursor: pointer !important; color: rgba(0, 0, 0, 0.87) !important;';
 		var declineButtonContent = document.createElement('div');
-		declineButtonContent.style.cssText = 'font-family: Roboto, Arial !important; font-size: 14px !important; justify-content: center !important; align-items: center !important; flex-direction: row !important; position: relative !important; padding: 0.7em 0.57em !important;';
+		declineButtonContent.style.cssText = 'font-family: Roboto, Arial !important; font-size: 14px !important; justify-content: center !important; align-items: center !important; flex-direction: row !important; position: relative !important; padding: 0.7em 0.57em !important; -webkit-font-smoothing: antialiased;';
 		declineButtonContent.innerHTML = 'Decline';
 		declineButton.appendChild(declineButtonContent);
 
 		declineButton.addEventListener('click', function(e) {
 			dialog.parentNode.removeChild(dialog);
+			backdrop.parentNode.removeChild(backdrop);
 		});
 
 		actions.appendChild(declineButton);
@@ -88,10 +102,12 @@
 		var acceptButton = document.createElement('div');
 		acceptButton.style.cssText = 'display: inline-block !important; position: relative !important; box-sizing: border-box !important; min-width: 5.14em !important; margin: 0 0.29em !important; background: transparent !important; text-align: center !important; font: inherit !important; text-transform: uppercase !important; outline: none !important; cursor: pointer !important; color: rgba(0, 0, 0, 0.87) !important; color: #03a9f4 !important;';
 		var acceptButtonContent = document.createElement('div');
-		acceptButtonContent.style.cssText = 'font-family: Roboto, Arial !important; font-size: 14px !important; justify-content: center !important; align-items: center !important; flex-direction: row !important; position: relative !important; padding: 0.7em 0.57em !important;';
+		acceptButtonContent.style.cssText = 'font-family: Roboto, Arial !important; font-size: 14px !important; justify-content: center !important; align-items: center !important; flex-direction: row !important; position: relative !important; padding: 0.7em 0.57em !important; -webkit-font-smoothing: antialiased;';
 		acceptButtonContent.innerHTML = 'Accept';
 
 		acceptButton.addEventListener('click', function(e) {
+			dialog.parentNode.removeChild(dialog);
+			backdrop.parentNode.removeChild(backdrop);
 			submitButton.removeEventListener('click', onClick);
 			submitButton.click();
 		});

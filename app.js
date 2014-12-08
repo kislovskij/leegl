@@ -131,8 +131,8 @@ app.post('/account/delete', passportConf.isAuthenticated, userController.postDel
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 
 app.get('/terms', passportConf.isAuthenticated, passportConf.isAdministrator, termsController.listTerms);
-app.get('/terms/create', passportConf.isAuthenticated, termsController.getCreateTerms);
-app.post('/terms/create', passportConf.isAuthenticated, termsController.postCreateTerms);
+app.get('/terms/create', termsController.getCreateTerms);
+app.post('/terms/create', termsController.postCreateTerms);
 app.get('/terms/:id', passportConf.isAuthenticated, passportConf.isAdministrator, termsController.getTerms);
 app.post('/terms/:id', passportConf.isAuthenticated, passportConf.isAdministrator, termsController.postTerms);
 app.get('/aspect/create', passportConf.isAuthenticated, passportConf.isAdministrator, aspectController.getAddAspect);
