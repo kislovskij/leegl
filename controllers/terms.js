@@ -20,7 +20,7 @@ exports.getCreateTerms = function(req, res) {
   	}, {});
 
 	  res.render('add-terms', {
-	    title: 'Add Terms',
+	    title: 'Submit Service',
 	    categories: result
   	});
   }).populate('category');
@@ -28,7 +28,7 @@ exports.getCreateTerms = function(req, res) {
 };
 
 exports.getTermsByDomain = function(req, res) {
-  Terms.find({ serviceDomains: req.params.domain }, function(err, terms) {
+  Terms.find({ serviceDomains: req.params.domain, reviewed: true }, function(err, terms) {
   	return res.send(terms);
   }).populate('aspects.aspect');
 };
@@ -105,8 +105,16 @@ exports.getTerms = function(req, res) {
       terms.activeAspects = {};
 
       terms.aspects.forEach(function(item) {
-        terms.activeAspects[item.aspect._id] = true;
+        terms.activeAspects[item.aspect] = true;
+        
+        if (item.citation)
+          terms[item.aspect + '_citation'] = item.citation;
+
+        terms[item.aspect + '_weight'] = item.weight;
       });
+
+      terms.domain = terms.serviceDomains.join(',');
+      terms.termsUrl = terms.termsUrls.join(',');
 
       res.render('edit-terms', {
         title: 'Terms of ' + terms.name,
@@ -119,5 +127,42 @@ exports.getTerms = function(req, res) {
 };
 
 exports.postTerms = function(req, res) {
+
+  if(typeof req.body.aspects == 'string') {
+    req.body.aspects = [req.body.aspects];
+  }
+
+  if (!req.params.id) return res.send(401);
+
+  Terms.findOne({ '_id': req.params.id }, function(err, terms) {
+    var aspects = [];
+
+    if (req.body.aspects === undefined) {
+      return res.send(500);
+    }
+
+    req.body.aspects.map(function(k, v) {
+      aspects.push({
+        aspect: k,
+        weight: (req.body[k + '_weight'] || 1),
+        citation: (req.body[k + '_citation'] || '')
+      });
+    });
+
+    terms.name = req.body.name;
+    terms.serviceDomains = req.body.domain.split(',');
+    terms.termsUrls = req.body.termsUrl.split(',');
+    terms.aspects = aspects;
+    terms.registrationUrl = req.body.registrationUrl;
+    terms.interception = req.body.interception;
+    terms.selector = req.body.selector;
+    terms.reviewed = (req.body.reviewed == '1') ? true : false;
+
+    terms.save(function(err, terms) {
+      if (err) return res.send(500, err);
+
+      res.redirect('/terms/' + terms._id);
+    });
+  });
 
 };

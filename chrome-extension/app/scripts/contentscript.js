@@ -40,6 +40,9 @@
 			var item = document.createElement('div');
 			item.style.cssText = 'font-family: Roboto, Arial !important; font-size: 16px !important; line-height: 28px !important; padding: 28px !important; text-align: left !important;';
 
+			var badge = document.createElement('div');
+			badge.innerHTML = value.aspect;
+
 			if (index < data.aspects.length - 1) {
 				item.style.cssText += ' border-bottom: 1px solid #ccc !important;';
 			}

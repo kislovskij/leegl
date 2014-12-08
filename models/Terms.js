@@ -26,7 +26,11 @@ var termsSchema = new mongoose.Schema({
   ],
   registrationUrl: String,
   interception: String,
-  selector: String
+  selector: String,
+  reviewed: {
+    type: Boolean,
+    default: false
+  }
 });
 
 module.exports = mongoose.model('Terms', termsSchema);
