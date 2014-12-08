@@ -100,14 +100,14 @@ exports.getTerms = function(req, res) {
       return prev;
     }, {});
 
-    terms.activeAspects = {};
-
-    terms.aspects.forEach(function(item) {
-      terms.activeAspects[item.aspect._id] = true;
-    });
-
     Terms.findOne({'_id': req.params.id}, function(err, terms) {
       
+      terms.activeAspects = {};
+
+      terms.aspects.forEach(function(item) {
+        terms.activeAspects[item.aspect._id] = true;
+      });
+
       res.render('edit-terms', {
         title: 'Terms of ' + terms.name,
         terms: terms,
