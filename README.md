@@ -2,15 +2,7 @@
 
 # Long Terms. Short Version.
 
-This is a sample submission repository for the hackathon. If you don't know what that is, please [go here](https://koding.com/Hackathon). You can fork this repo and use this as a starting point. You *do not* have
-send a pull request for this repo. This is just a sample of what your repo can look like when you submit it
-to us as part of the final process for the hackathon.
-
-## Description
-
-[![Koding Hackathon](/images/badge.png?raw=true "Koding Hackathon")](https://koding.com/Hackathon)
-
-A brief introduction to your project. It should include the motivation behind the project and also how it addresses the hackthon theme you've selected.
+No one reads the fine print - because major online services don't want you to read them. The internet is a really scary place if you are aware of what you agreed on. We need to change that. By offering transparent overviews of what the terms really are – implemented directly into the registration process. By doing so we force online platforms to change something about their fine print. So that in future you don't need to accept "basically everything".
 
 ## Screenshots
 
@@ -18,7 +10,3 @@ Here provide couple screenshots of your project. You can use a tool like https:/
 
 ![Koding](https://koding.com/a/site.landing/images/slideshow/2x/ss-terminal.png "Koding")
 ![Koding](https://koding.com/a/site.landing/images/slideshow/2x/ss-ide.png "Koding")
-
-## APIs used
-
-Provide a list of APIs you used in this project.
