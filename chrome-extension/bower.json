@@ -1,6 +1,8 @@
 {
   "name": "hackathon",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.1"
+  },
   "devDependencies": {}
 }

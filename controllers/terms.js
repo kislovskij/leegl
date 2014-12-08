@@ -41,7 +41,7 @@ exports.postAddTerms = function(req, res) {
   Terms.findOne({ domain: req.body.domain }, function(err, existingTerms) {
     if (existingTerms) {
       req.flash('errors', { msg: 'Terms with that domain name already exists.' });
-      return res.redirect('/add-terms');
+      return res.redirect('/terms/create');
     }
 
     var aspects = [];
@@ -53,15 +53,14 @@ exports.postAddTerms = function(req, res) {
     req.body.aspects.map(function(k, v) {
     	aspects.push({
     		aspect: k,
-    		weight: req.body[k + '_weight'],
-    		citation: req.body[k + '_citation']
+    		weight: (req.body[k + '_weight'] || 1),
+    		citation: (req.body[k + '_citation'] || '')
     	});
     });
 
   	var terms = new Terms({
   	  name: req.body.name,
   	  serviceDomains: req.body.domain.split(','),
-  	  terms: req.body.terms,
   	  termsUrls: req.body.termsUrl.split(','),
   	  aspects: aspects,
   	  registrationUrl: req.body.registrationUrl,
@@ -70,9 +69,9 @@ exports.postAddTerms = function(req, res) {
   	});
 
     terms.save(function(err, terms) {
-      if (err) return next(err);
+      if (err) return res.send(500, err);
 
-      res.redirect('/terms/' + terms._id);
+      res.redirect('/terms/create');
     });
   });
 

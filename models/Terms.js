@@ -9,7 +9,6 @@ var termsSchema = new mongoose.Schema({
       type: String, unique: true, lowercase: true
     }
   ],
-  terms: String,
   termsUrls: [
     {
       type: String

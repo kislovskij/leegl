@@ -14,6 +14,11 @@
       "scripts/background.js"
     ]
   },
+  "web_accessible_resources": [
+    "images/leegl.svg",
+    "styles/Roboto.css",
+    "fonts/Roboto-Regular-Latin.woff2"
+  ],
   "options_page": "options.html",
   "content_scripts": [
     {

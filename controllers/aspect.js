@@ -22,7 +22,7 @@ exports.postAddAspect = function(req, res) {
   Aspect.findOne({ text: req.body.text }, function(err, existingTerms) {
     if (existingTerms) {
       req.flash('errors', { msg: 'Aspect with that text already exists.' });
-      return res.redirect('/add-aspect');
+      return res.redirect('/aspect/create');
     }
 
     AspectCategory.findOne({ _id: req.body.category }, function(err, category) {
@@ -39,7 +39,7 @@ exports.postAddAspect = function(req, res) {
       aspect.save(function(err, terms) {
         if (err) return next(err);
 
-        res.redirect('/add-aspect');
+        res.redirect('/aspect/create');
       });
     });
   });
