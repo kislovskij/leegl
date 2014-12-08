@@ -100,6 +100,12 @@ exports.getTerms = function(req, res) {
       return prev;
     }, {});
 
+    item.activeAspects = {};
+
+    terms.aspects.forEach(function(item) {
+      item.activeAspects[item.aspect._id] = true;
+    });
+
     Terms.findOne({'_id': req.params.id}, function(err, terms) {
       
       res.render('edit-terms', {

@@ -44,7 +44,7 @@ block content
           br
           each aspect in category
             div.toggle
-              input(type='checkbox', name='aspects', value=aspect._id, checked=terms.aspects[aspect._id])
+              input(type='checkbox', name='aspects', value=aspect._id, checked=terms.activeAspects[aspect._id])
               &nbsp;
               label
                 = aspect.text
