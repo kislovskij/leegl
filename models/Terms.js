@@ -6,7 +6,7 @@ var termsSchema = new mongoose.Schema({
   name: String,
   serviceDomains: [
     {
-      type: String, unique: true, lowercase: true
+      type: String, lowercase: true
     }
   ],
   termsUrls: [
